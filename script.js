@@ -68,10 +68,9 @@ function solveQuadratic() {
 
 function nextStep() {
     currentStep++;
-    solveQuadratic();
-
-    // If all steps are displayed, disable the button
-    if (currentStep === steps.length - 1) {
+    if (currentStep < steps.length) {
+        solveQuadratic();
+    } else {
         document.querySelector("button").disabled = true;
     }
 }
