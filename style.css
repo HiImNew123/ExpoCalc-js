@@ -5,9 +5,14 @@ body {
 .container {
     max-width: 400px;
     margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 input, button {
+    width: 100%;
+    box-sizing: border-box;
     margin-bottom: 10px;
 }
 
@@ -19,4 +24,20 @@ button {
 #result {
     margin-top: 20px;
     font-weight: bold;
+}
+
+/* Media queries for responsiveness */
+
+@media screen and (min-width: 481px) {
+    /* Adjust container width for larger screens */
+    .container {
+        max-width: 600px;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    /* Further adjustments for larger screens */
+    .container {
+        max-width: 800px;
+    }
 }
