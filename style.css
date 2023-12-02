@@ -26,18 +26,9 @@ button {
     font-weight: bold;
 }
 
-/* Media queries for responsiveness */
-
-@media screen and (min-width: 481px) {
-    /* Adjust container width for larger screens */
+/* Media query for responsiveness */
+@media screen and (min-width: 600px) {
     .container {
         max-width: 600px;
-    }
-}
-
-@media screen and (min-width: 769px) {
-    /* Further adjustments for larger screens */
-    .container {
-        max-width: 800px;
     }
 }
