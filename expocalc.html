@@ -3,27 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quadratic Equation Solver</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Quadratic Function Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        p {
+            margin-top: 15px;
+        }
+        ol {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        li {
+            display: none;
+        }
+        .visible {
+            display: list-item;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Quadratic Equation Solver</h1>
-        <label for="a">Enter coefficient a:</label>
-        <input type="number" id="a" placeholder="Enter a" required>
+    <h2>Quadratic Function Calculator</h2>
 
-        <label for="b">Enter coefficient b:</label>
-        <input type="number" id="b" placeholder="Enter b" required>
+    <label for="coeffA">Coefficient a:</label>
+    <input type="number" id="coeffA" placeholder="Enter coefficient a">
 
-        <label for="c">Enter coefficient c:</label>
-        <input type="number" id="c" placeholder="Enter c" required>
+    <label for="coeffB">Coefficient b:</label>
+    <input type="number" id="coeffB" placeholder="Enter coefficient b">
 
-        <button onclick="solveQuadratic()">Show Steps</button>
+    <label for="coeffC">Coefficient c:</label>
+    <input type="number" id="coeffC" placeholder="Enter coefficient c">
 
-        <div id="result"></div>
-        <button id="nextButton" onclick="nextStep()" style="display:none;">Next Step</button>
-    </div>
+    <button onclick="calculateQuadratic()">Calculate Roots</button>
 
-    <script src="script.js"></script>
+    <p id="result"></p>
+
+    <h3>Solution Steps:</h3>
+    <ol id="solutionSteps"></ol>
+
+    <button onclick="nextStep()">Next Step</button>
+
+    <script>
+        let currentStep = 0;
+        const stepsElement = document.getElementById('solutionSteps');
+
+        function calculateQuadratic() {
+            // Get values from input fields
+            const a = parseFloat(document.getElementById('coeffA').value);
+            const b = parseFloat(document.getElementById('coeffB').value);
+            const c = parseFloat(document.getElementById('coeffC').value);
+
+            // Check if all input fields are filled
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                alert("Please enter valid numeric values for all coefficients.");
+                return;
+            }
+
+            // Calculate the discriminant
+            const discriminant = b**2 - 4*a*c;
+
+            // Display the discriminant
+            document.getElementById('result').innerText = `Discriminant: ${discriminant}`;
+
+            // Show solution steps
+            stepsElement.innerHTML = '';
+            stepsElement.innerHTML += `<li>Step 1: Calculate the discriminant (b^2 - 4ac).</li>`;
+            stepsElement.innerHTML += `<li>Step 2: Determine the nature of the roots based on the discriminant.</li>`;
+
+            if (discriminant > 0) {
+                stepsElement.innerHTML += `<li>Step 3: Roots are real and distinct. Use the quadratic formula to calculate roots.</li>`;
+                stepsElement.innerHTML += `<li>Step 4: Calculate x1 and x2 using the quadratic formula.</li>`;
+            } else if (discriminant === 0) {
+                stepsElement.innerHTML += `<li>Step 3: Roots are real and equal. Use the quadratic formula to calculate the root.</li>`;
+                stepsElement.innerHTML += `<li>Step 4: Calculate x using the quadratic formula.</li>`;
+            } else {
+                stepsElement.innerHTML += `<li>Step 3: Roots are complex. No real solutions.</li>`;
+            }
+
+            // Show only the first step initially
+            const steps = stepsElement.getElementsByTagName('li');
+            steps[0].classList.add('visible');
+            currentStep = 1;
+        }
+
+        function nextStep() {
+            const steps = stepsElement.getElementsByTagName('li');
+            if (currentStep < steps.length) {
+                steps[currentStep].classList.add('visible');
+                currentStep++;
+            }
+        }
+    </script>
 </body>
 </html>
