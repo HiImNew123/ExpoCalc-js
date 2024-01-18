@@ -1,4 +1,8 @@
+let currentStep = 0;
+
 function solveQuadratic() {
+    currentStep = 0;
+
     // Get coefficients from user input
     const a = parseFloat(document.getElementById("a").value);
     const b = parseFloat(document.getElementById("b").value);
@@ -40,5 +44,30 @@ function solveQuadratic() {
         document.getElementById("result").innerHTML += `   Discriminant = ${b}^2 - 4 * ${a} * ${c} = ${discriminant} <br><br>`;
 
         document.getElementById("result").innerHTML += "Since the discriminant is negative, there are no real roots.";
+    }
+
+    // Show the "Next Step" button
+    document.getElementById("nextButton").style.display = "inline";
+}
+
+function nextStep() {
+    // Increment the current step
+    currentStep++;
+
+    // Hide the "Next Step" button if all steps are displayed
+    if (currentStep === 2) {
+        document.getElementById("nextButton").style.display = "none";
+    }
+
+    // Show the next step based on the current step value
+    switch (currentStep) {
+        case 1:
+            document.getElementById("result").innerHTML += "<br>Step 3: Substitute coefficients into the Quadratic Formula<br>";
+            document.getElementById("result").innerHTML += "   Quadratic Formula: x = (-b ± √(b^2 - 4ac)) / (2a)<br>";
+            document.getElementById("result").innerHTML += `   For Root 1: x = (-${b} + √${discriminant}) / (2 * ${a})<br>`;
+            document.getElementById("result").innerHTML += `   For Root 2: x = (-${b} - √${discriminant}) / (2 * ${a})<br><br>`;
+            break;
+        default:
+            break;
     }
 }
