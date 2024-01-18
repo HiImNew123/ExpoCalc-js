@@ -1,43 +1,44 @@
 function solveQuadratic() {
-    // Get coefficients from input fields
-    var a = parseFloat(document.getElementById('a').value);
-    var b = parseFloat(document.getElementById('b').value);
-    var c = parseFloat(document.getElementById('c').value);
+    // Get coefficients from user input
+    const a = parseFloat(document.getElementById("a").value);
+    const b = parseFloat(document.getElementById("b").value);
+    const c = parseFloat(document.getElementById("c").value);
 
-    // Calculate discriminant
-    var discriminant = b * b - 4 * a * c;
+    // Calculate the discriminant
+    const discriminant = b ** 2 - 4 * a * c;
 
-    // Display the steps
-    var steps = [];
+    // Display the quadratic equation
+    const equation = `${a}x^2 + ${b}x + ${c} = 0`;
+    document.getElementById("result").innerHTML = `Solving the quadratic equation: ${equation} <br><br>`;
 
+    // Check the nature of roots
     if (discriminant > 0) {
-        var root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
-        var root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+        // Two real roots
+        document.getElementById("result").innerHTML += "Step 1: Calculate Discriminant (b^2 - 4ac) <br>";
+        document.getElementById("result").innerHTML += `   Discriminant = ${b}^2 - 4 * ${a} * ${c} = ${discriminant} <br><br>`;
 
-        steps.push(`Discriminant (b^2 - 4ac) = ${discriminant}`);
+        document.getElementById("result").innerHTML += "Step 2: Calculate Roots using Quadratic Formula <br>";
+        const root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+        const root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+        document.getElementById("result").innerHTML += `   Root 1 = (-${b} + √${discriminant}) / (2 * ${a}) = ${root1.toFixed(2)} <br>`;
+        document.getElementById("result").innerHTML += `   Root 2 = (-${b} - √${discriminant}) / (2 * ${a}) = ${root2.toFixed(2)} <br><br>`;
 
-        steps.push(`Roots are real and different: x1 = ${root1}, x2 = ${root2}`);
-    } else if (discriminant == 0) {
-        var root = -b / (2 * a);
+        document.getElementById("result").innerHTML += "Therefore, the equation has two real roots.";
+    } else if (discriminant === 0) {
+        // One real root
+        document.getElementById("result").innerHTML += "Step 1: Calculate Discriminant (b^2 - 4ac) <br>";
+        document.getElementById("result").innerHTML += `   Discriminant = ${b}^2 - 4 * ${a} * ${c} = ${discriminant} <br><br>`;
 
-        steps.push(`Discriminant (b^2 - 4ac) = ${discriminant}`);
+        document.getElementById("result").innerHTML += "Step 2: Calculate Root using Quadratic Formula <br>";
+        const root = -b / (2 * a);
+        document.getElementById("result").innerHTML += `   Root = -${b} / (2 * ${a}) = ${root.toFixed(2)} <br><br>`;
 
-        steps.push(`Roots are real and the same: x = ${root}`);
+        document.getElementById("result").innerHTML += "Therefore, the equation has one real root.";
     } else {
-        var realPart = -b / (2 * a);
-        var imaginaryPart = Math.sqrt(Math.abs(discriminant)) / (2 * a);
+        // No real roots
+        document.getElementById("result").innerHTML += "Step 1: Calculate Discriminant (b^2 - 4ac) <br>";
+        document.getElementById("result").innerHTML += `   Discriminant = ${b}^2 - 4 * ${a} * ${c} = ${discriminant} <br><br>`;
 
-        steps.push(`Discriminant (b^2 - 4ac) = ${discriminant}`);
-
-        steps.push(`Roots are complex and different: x1 = ${realPart} + ${imaginaryPart}i, x2 = ${realPart} - ${imaginaryPart}i`);
+        document.getElementById("result").innerHTML += "Since the discriminant is negative, there are no real roots.";
     }
-
-    // Display steps
-    var resultContainer = document.getElementById('result');
-    resultContainer.innerHTML = '';
-    steps.forEach(function (step) {
-        var stepElement = document.createElement('p');
-        stepElement.textContent = step;
-        resultContainer.appendChild(stepElement);
-    });
 }
