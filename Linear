@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Function Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        p {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Linear Function Calculator</h2>
+
+    <label for="slope">Slope (m):</label>
+    <input type="number" id="slope" placeholder="Enter slope">
+
+    <label for="intercept">Y-Intercept (b):</label>
+    <input type="number" id="intercept" placeholder="Enter y-intercept">
+
+    <button onclick="calculateLinearFunction()">Calculate</button>
+
+    <label for="inputX">Enter x:</label>
+    <input type="number" id="inputX" placeholder="Enter x value">
+
+    <p id="result"></p>
+
+    <script>
+        function calculateLinearFunction() {
+            // Get values from input fields
+            const slope = parseFloat(document.getElementById('slope').value);
+            const intercept = parseFloat(document.getElementById('intercept').value);
+            const inputX = parseFloat(document.getElementById('inputX').value);
+
+            // Check if all input fields are filled
+            if (isNaN(slope) || isNaN(intercept) || isNaN(inputX)) {
+                alert("Please enter valid numeric values for all fields.");
+                return;
+            }
+
+            // Calculate the y value using the linear function
+            const result = slope * inputX + intercept;
+
+            // Display the result
+            document.getElementById('result').innerText = `For x = ${inputX}, y = ${result}`;
+        }
+    </script>
+</body>
+</html>
