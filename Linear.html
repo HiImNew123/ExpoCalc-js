@@ -32,6 +32,16 @@
         p {
             margin-top: 15px;
         }
+        ol {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        li {
+            display: none;
+        }
+        .visible {
+            display: list-item;
+        }
     </style>
 </head>
 <body>
@@ -50,7 +60,15 @@
 
     <p id="result"></p>
 
+    <h3>Calculation Steps:</h3>
+    <ol id="calculationSteps"></ol>
+
+    <button onclick="nextStep()">Next Step</button>
+
     <script>
+        let currentStep = 0;
+        const stepsElement = document.getElementById('calculationSteps');
+
         function calculateLinearFunction() {
             // Get values from input fields
             const slope = parseFloat(document.getElementById('slope').value);
@@ -68,6 +86,25 @@
 
             // Display the result
             document.getElementById('result').innerText = `For x = ${inputX}, y = ${result}`;
+
+            // Show calculation steps
+            stepsElement.innerHTML = '';
+            stepsElement.innerHTML += `<li>Step 1: Multiply the slope (${slope}) by the input x (${inputX}).</li>`;
+            stepsElement.innerHTML += `<li>Step 2: Add the y-intercept (${intercept}).</li>`;
+            stepsElement.innerHTML += `<li>Step 3: The result is the y value (${result}).</li>`;
+
+            // Show only the first step initially
+            const steps = stepsElement.getElementsByTagName('li');
+            steps[0].classList.add('visible');
+            currentStep = 1;
+        }
+
+        function nextStep() {
+            const steps = stepsElement.getElementsByTagName('li');
+            if (currentStep < steps.length) {
+                steps[currentStep].classList.add('visible');
+                currentStep++;
+            }
         }
     </script>
 </body>
