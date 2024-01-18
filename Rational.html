@@ -47,23 +47,51 @@
         <input type="text" id="denominator" placeholder="Enter denominator">
 
         <button onclick="calculate()">Calculate</button>
+        <button onclick="nextStep()">Next Step</button>
 
         <h2>Result:</h2>
         <p id="result">-</p>
-    </div>
 
-    <script>
-        function calculate() {
-            const numerator = parseFloat(document.getElementById('numerator').value);
-            const denominator = parseFloat(document.getElementById('denominator').value);
+        <h2>Steps:</h2>
+        <ol id="steps"></ol>
 
-            if (!isNaN(numerator) && !isNaN(denominator) && denominator !== 0) {
-                const result = numerator / denominator;
-                document.getElementById('result').innerText = `Result: ${result}`;
-            } else {
-                document.getElementById('result').innerText = 'Invalid input. Please enter valid numbers.';
+        <script>
+            let currentStep = 0;
+            const stepsElement = document.getElementById('steps');
+
+            function calculate() {
+                const numerator = parseFloat(document.getElementById('numerator').value);
+                const denominator = parseFloat(document.getElementById('denominator').value);
+
+                stepsElement.innerHTML = ''; // Clear previous steps
+                currentStep = 0;
+
+                if (!isNaN(numerator) && !isNaN(denominator) && denominator !== 0) {
+                    const result = numerator / denominator;
+                    document.getElementById('result').innerText = `Result: ${result}`;
+
+                    // Show steps
+                    stepsElement.innerHTML += `<li>Step 1: Divide the numerator (${numerator}) by the denominator (${denominator}).</li>`;
+                    stepsElement.innerHTML += `<li>Step 2: The result is ${result}.</li>`;
+
+                    // Hide all steps initially
+                    const steps = stepsElement.getElementsByTagName('li');
+                    for (let i = 0; i < steps.length; i++) {
+                        steps[i].style.display = 'none';
+                    }
+                } else {
+                    document.getElementById('result').innerText = 'Invalid input. Please enter valid numbers.';
+                }
             }
-        }
-    </script>
+
+            function nextStep() {
+                const steps = stepsElement.getElementsByTagName('li');
+                if (currentStep < steps.length) {
+                    steps[currentStep].style.display = 'block';
+                    currentStep++;
+                }
+            }
+        </script>
+    </div>
 </body>
 </html>
