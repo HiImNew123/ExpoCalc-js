@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    #quiz-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .question {
+      margin-bottom: 15px;
+    }
+
+    .options {
+      list-style: none;
+      padding: 0;
+    }
+
+    .option {
+      margin-bottom: 8px;
+    }
+
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    #submit-btn {
+      margin-top: 15px;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="quiz-container">
+  <div class="question">
+    <p>1. What is the general form of a quadratic polynomial?</p>
+    <ul class="options">
+      <li class="option"><input type="radio" name="q1" value="a"> \(ax^2 + bx + c\)</li>
+      <li class="option"><input type="radio" name="q1" value="b"> \(mx + b\)</li>
+      <li class="option"><input type="radio" name="q1" value="c"> \((x - p)(x - q)\)</li>
+    </ul>
+  </div>
+
+  <div class="question">
+    <p>2. Which term in a quadratic function can have a power of two?</p>
+    <ul class="options">
+      <li class="option"><input type="radio" name="q2" value="a"> Linear term</li>
+      <li class="option"><input type="radio" name="q2" value="b"> Constant term</li>
+      <li class="option"><input type="radio" name="q2" value="c"> Quadratic term</li>
+    </ul>
+  </div>
+
+  <div class="question">
+    <p>3. What is the range of a quadratic function?</p>
+    <ul class="options">
+      <li class="option"><input type="radio" name="q3" value="a"> Set of all x-values</li>
+      <li class="option"><input type="radio" name="q3" value="b"> Set of all y-values</li>
+      <li class="option"><input type="radio" name="q3" value="c"> Set of all coefficients</li>
+    </ul>
+  </div>
+
+  <div class="question">
+    <p>4. In which form is the quadratic function \(f(x) = (x - p)(x - q)\) expressed?</p>
+    <ul class="options">
+      <li class="option"><input type="radio" name="q4" value="a"> Standard Form</li>
+      <li class="option"><input type="radio" name="q4" value="b"> Factored Form</li>
+      <li class="option"><input type="radio" name="q4" value="c"> Vertex Form</li>
+    </ul>
+  </div>
+
+  <div class="question">
+    <p>5. If a quadratic function opens downward, what does the range include?</p>
+    <ul class="options">
+      <li class="option"><input type="radio" name="q5" value="a"> Only negative y-values</li>
+      <li class="option"><input type="radio" name="q5" value="b"> Only positive y-values</li>
+      <li class="option"><input type="radio" name="q5" value="c"> The y-value of the vertex and all numbers less than it</li>
+    </ul>
+  </div>
+
+  <div class="question">
+    <p>6. What is a defining characteristic of a linear function?</p>
+    <ul class="options">
+      <li class="option"><input type="radio" name="q6" value="a"> Forms a quadratic curve</li>
+      <li class="option"><input type="radio" name="q6" value="b"> Represents a straight line</li>
+      <li class="option"><input type="radio" name="q6" value="c"> Always has a cubic term</li>
+    </ul>
+  </div>
+
+  <div class="question">
+    <p>7. In terms of degrees, what is the maximum degree of a linear function?</p>
+    <ul class="options">
+      <li class="option"><input type="radio" name="q7" value="a"> Degree 0</li>
+      <li class="option"><input type="radio" name="q7" value="b"> Degree 1</li>
+      <li class="option"><input type="radio" name="q7" value="c"> Degree 2</li>
+    </ul>
+  </div>
+
+  <div class="question">
+    <p>8. How is a linear function generally represented in terms of its equation?</p>
+    <ul class="options">
+      <li class="option"><input type="radio" name="q8" value="a"> \(y = f(x) = a + bx\)</li>
+      <li class="option"><input type="radio" name="q8" value="b"> \(y = f(x) = ax^2 + bx + c\)</li>
+      <li class="option"><input type="radio" name="q8" value="c"> \(y = f(x) = a \sin(bx)\)</li>
+    </ul>
+  </div>
+
+  <div class="question">
+    <p>9. Provide an example of a linear function.</p>
+    <ul class="options">
+      <li class="option"><input type="radio" name="q9" value="a"> \(y = 2x^2 + 3x + 1\)</li>
+      <li class="option"><input type="radio" name="q9" value="b"> \(y = 5\)</li>
+      <li class="option"><input type="radio" name="q9" value="c"> \(y = \frac{1}{x}\)</li>
+    </ul>
+  </div>
+
+  <div class="question">
+    <p>10. What is the range of a linear function that is a horizontal line?</p>
+    <ul class="options">
+      <li class="option"><input type="radio" name="q10" value="a"> Infinite domains and ranges</li>
+      <li class="option"><input type="radio" name="q10" value="b"> Infinite domain, single-valued range</li>
+      <li class="option"><input type="radio" name="q10" value="c"> Single-valued domain, infinite range</li>
+    </ul>
+  </div>
+
+    <div class="question">
+      <p>11. What is a rational function?</p>
+      <ul class="options">
+        <li class="option"><input type="radio" id="q1a" name="q1" value="a"><label for="q1a">A function with a square root</label></li>
+        <li class="option"><input type="radio" id="q1b" name="q1" value="b"><label for="q1b">A function with a logarithm</label></li>
+        <li class="option"><input type="radio" id="q1c" name="q1" value="c"><label for="q1c">A function that can be written as a polynomial divided by a polynomial</label></li>
+      </ul>
+    </div>
+
+    <div class="question">
+      <p>12. What is the domain of a rational function?</p>
+      <ul class="options">
+        <li class="option"><input type="radio" id="q2a" name="q2" value="a"><label for="q2a">All real numbers</label></li>
+        <li class="option"><input type="radio" id="q2b" name="q2" value="b"><label for="q2b">All real numbers except the zeros of the denominator</label></li>
+        <li class="option"><input type="radio" id="q2c" name="q2" value="c"><label for="q2c">Only positive integers</label></li>
+      </ul>
+    </div>
+
+    <div class="question">
+      <p>13. Which of the following is an example of a rational function?</p>
+      <ul class="options">
+        <li class="option"><input type="radio" id="q3a" name="q3" value="a"><label for="q3a">y = sqrt(x)</label></li>
+        <li class="option"><input type="radio" id="q3b" name="q3" value="b"><label for="q3b">y = e^x</label></li>
+        <li class="option"><input type="radio" id="q3c" name="q3" value="c"><label for="q3c">y = (x^2 + x - 2) / (2x^2 - 2x - 3)</</label></li>
+      </ul>
+    </div>
+
+    <div class="question">
+      <p>14. What is the range of the parent function f(x) = 1/x?</p>
+      <ul class="options">
+        <li class="option"><input type="radio" id="q4a" name="q4" value="a"><label for="q4a">All real numbers except 0</label></li>
+        <li class="option"><input type="radio" id="q4b" name="q4" value="b"><label for="q4b">Only positive integers</label></li>
+        <li class="option"><input type="radio" id="q4c" name="q4" value="c"><label for="q4c">All integers</label></li>
+      </ul>
+    </div>
+
+    <div class="question">
+      <p>15. What is the general form of a rational function?</p>
+      <ul class="options">
+        <li class="option"><input type="radio" id="q5a" name="q5" value="a"><label for="q5a">p(x)/q(x)</label></li>
+        <li class="option"><input type="radio" id="q5b" name="q5" value="b"><label for="q5b">x^2 + 2x - 1</label></li>
+        <li class="option"><input type="radio" id="q5c" name="q5" value="c"><label for="q5c">sin(x) / cos(x)</label></li>
+      </ul>
+    </div>
+
+
+  <button id="submit-btn" onclick="submitQuiz()">Submit</button>
+</div>
+
+<script>
+  function submitQuiz() {
+    const correctAnswers = ['a', 'c', 'b', 'b', 'c','b', 'b', 'a', 'b', 'a','c','b','c','a','a'];
+    let score = 0;
+
+    for (let i = 1; i <= 15; i++) {
+      const selectedOption = document.querySelector('input[name="q' + i + '"]:checked');
+      if (selectedOption) {
+        if (selectedOption.value === correctAnswers[i - 1]) {
+          score++;
+        }
+      }
+    }
+
+    alert('Quiz submitted!\n\nYour score: ' + score + '/15');
+  }
+</script>
+
+</body>
+</html>
