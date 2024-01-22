@@ -46,6 +46,11 @@
             text-align: left;
         }
 
+        #error-message {
+            color: #ff0000;
+            margin-top: 10px;
+        }
+
         #buttons-container {
             display: flex;
             justify-content: center;
@@ -77,15 +82,25 @@
         <button onclick="nextStep()">Next Step</button>
     </div>
 
+    <div id="error-message"></div>
     <div id="steps"></div>
 
     <script>
         let a, b, c, delta, step;
         let stepsContainer = document.getElementById('steps');
+        let errorContainer = document.getElementById('error-message');
 
         function solveEquation() {
-            // Clear previous steps when new variables are input
+            // Check if coefficients are provided
+            if (!document.getElementById('a').value || !document.getElementById('b').value || !document.getElementById('c').value) {
+                errorContainer.innerHTML = 'Please enter coefficients for a, b, and c.';
+                stepsContainer.innerHTML = '';
+                return;
+            }
+
+            // Clear previous steps and error messages
             stepsContainer.innerHTML = '';
+            errorContainer.innerHTML = '';
 
             a = parseFloat(document.getElementById('a').value);
             b = parseFloat(document.getElementById('b').value);
@@ -94,23 +109,63 @@
             delta = b * b - 4 * a * c;
             step = 0;
 
-            displayStep();
+            // Display the quadratic equation
+            stepsContainer.innerHTML += `<p>Quadratic equation: ${a}x^2 + ${b}x + ${c} = 0</p>`;
+
+            nextStep(); // Display the first step
         }
 
-        function displayStep() {
+        function nextStep() {
             let stepText = '';
 
             switch (step) {
-                // ... (unchanged)
+                case 0:
+                    stepText = 'Step 1: Identify the coefficients a, b, and c from the quadratic equation.';
+                    break;
+                case 1:
+                    stepText = `Step 2: Calculate the discriminant (Δ) = b^2 - 4ac = ${b}^2 - 4 * ${a} * ${c} = ${delta}.`;
+                    break;
+                case 2:
+                    if (delta > 0) {
+                        stepText = 'Step 3: Since Δ > 0, the quadratic equation has two distinct real solutions.';
+                    } else if (delta === 0) {
+                        stepText = 'Step 3: Since Δ = 0, the quadratic equation has one real solution (a double root).';
+                    } else {
+                        stepText = 'Step 3: Since Δ < 0, the quadratic equation has two complex conjugate solutions.';
+                    }
+                    break;
+                case 3:
+                    if (delta > 0) {
+                        stepText = 'Step 4: Use the quadratic formula to find the solutions: x = (-b ± √Δ) / (2a).';
+                    } else if (delta === 0) {
+                        stepText = 'Step 4: Use the quadratic formula to find the solution: x = -b / (2a).';
+                    } else {
+                        stepText = 'Step 4: Use the quadratic formula for complex solutions: x = (-b ± i√|Δ|) / (2a).';
+                    }
+                    break;
+                case 4:
+                    if (delta > 0) {
+                        let x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                        let x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                        stepText = `Step 5: The solutions are x1 = ${x1} and x2 = ${x2}.`;
+                    } else if (delta === 0) {
+                        let x = -b / (2 * a);
+                        stepText = `Step 5: The solution is x = ${x}.`;
+                    } else {
+                        let realPart = -b / (2 * a);
+                        let imagPart = Math.sqrt(Math.abs(delta)) / (2 * a);
+                        stepText = `Step 5: The complex solutions are x1 = ${realPart} + i${imagPart} and x2 = ${realPart} - i${imagPart}.`;
+                    }
+                    break;
+                default:
+                    stepText = 'No more steps.';
             }
 
             // Append the new step to the existing content
             stepsContainer.innerHTML += `<p>${stepText}</p>`;
-        }
 
-        function nextStep() {
+            // Increment the step counter
             step++;
-            displayStep();
         }
     </script>
 
