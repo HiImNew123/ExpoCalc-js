@@ -3,109 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linear Function Calculator</title>
+    <title>Slope Calculator</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
         label {
             display: block;
-            margin-bottom: 5px;
+            margin: 10px 0;
+            color: #333;
         }
+
         input {
-            width: 100%;
             padding: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            width: 100%;
             box-sizing: border-box;
         }
+
         button {
-            background-color: #4caf50;
+            padding: 10px 20px;
+            background-color: #4CAF50;
             color: white;
-            padding: 10px;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
-            width: 100%;
         }
-        p {
-            margin-top: 15px;
+
+        button:hover {
+            background-color: #45a049;
         }
-        ol {
-            margin-top: 15px;
-            padding-left: 20px;
+
+        #slopeResult {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            margin-bottom: 20px;
         }
-        li {
+
+        #nextStepButton {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             display: none;
         }
-        .visible {
-            display: list-item;
+
+        #nextStepButton:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <h2>Linear Function Calculator</h2>
 
-    <label for="slope">Slope (m):</label>
-    <input type="number" id="slope" placeholder="Enter slope">
+    <h2>Slope Calculator</h2>
 
-    <label for="intercept">Y-Intercept (b):</label>
-    <input type="number" id="intercept" placeholder="Enter y-intercept">
+    <form id="slopeForm">
+        <label for="x1">Enter x1: </label>
+        <input type="number" id="x1" required step="any">
 
-    <button onclick="calculateLinearFunction()">Calculate</button>
+        <label for="y1">Enter y1: </label>
+        <input type="number" id="y1" required step="any">
 
-    <label for="inputX">Enter x:</label>
-    <input type="number" id="inputX" placeholder="Enter x value">
+        <label for="x2">Enter x2: </label>
+        <input type="number" id="x2" required step="any">
 
-    <p id="result"></p>
+        <label for="y2">Enter y2: </label>
+        <input type="number" id="y2" required step="any">
 
-    <h3>Calculation Steps:</h3>
-    <ol id="calculationSteps"></ol>
+        <button type="button" onclick="calculateSlope()">Calculate Slope</button>
+    </form>
 
-    <button onclick="nextStep()">Next Step</button>
+    <div id="slopeResult"></div>
+    <button id="nextStepButton" onclick="nextStep()">Next Step</button>
 
     <script>
-        let currentStep = 0;
-        const stepsElement = document.getElementById('calculationSteps');
+        var currentStep = 0;
+        var steps = [];
 
-        function calculateLinearFunction() {
-            // Get values from input fields
-            const slope = parseFloat(document.getElementById('slope').value);
-            const intercept = parseFloat(document.getElementById('intercept').value);
-            const inputX = parseFloat(document.getElementById('inputX').value);
+        function calculateSlope() {
+            try {
+                var x1 = parseFloat(document.getElementById("x1").value);
+                var y1 = parseFloat(document.getElementById("y1").value);
+                var x2 = parseFloat(document.getElementById("x2").value);
+                var y2 = parseFloat(document.getElementById("y2").value);
 
-            // Check if all input fields are filled
-            if (isNaN(slope) || isNaN(intercept) || isNaN(inputX)) {
-                alert("Please enter valid numeric values for all fields.");
-                return;
+                if (isNaN(x1) || isNaN(y1) || isNaN(x2) || isNaN(y2)) {
+                    throw new Error("Please enter valid numeric values for all coordinates.");
+                }
+
+                if (x1 === x2) {
+                    throw new Error("The x-coordinates must be different for the calculation of slope.");
+                }
+
+                steps.push("Step 1: Given points (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ")");
+                steps.push("Step 2: Calculate slope using the formula (y2 - y1) / (x2 - x1)");
+                steps.push("Step 3: Substitute values into the formula");
+                steps.push("Step 4: Simplify the expression");
+                steps.push("Step 5: The slope of the line is " + (y2 - y1) / (x2 - x1));
+
+                showNextStep();
+
+            } catch (error) {
+                document.getElementById("slopeResult").innerHTML += "<p>Error: " + error.message + "</p>";
             }
+        }
 
-            // Calculate the y value using the linear function
-            const result = slope * inputX + intercept;
+        function showNextStep() {
+            var resultDiv = document.getElementById("slopeResult");
+            resultDiv.innerHTML += "<p>" + steps[currentStep] + "</p>";
 
-            // Display the result
-            document.getElementById('result').innerText = `For x = ${inputX}, y = ${result}`;
-
-            // Show calculation steps
-            stepsElement.innerHTML = '';
-            stepsElement.innerHTML += `<li>Step 1: Multiply the slope (${slope}) by the input x (${inputX}).</li>`;
-            stepsElement.innerHTML += `<li>Step 2: Add the y-intercept (${intercept}).</li>`;
-            stepsElement.innerHTML += `<li>Step 3: The result is the y value (${result}).</li>`;
-
-            // Show only the first step initially
-            const steps = stepsElement.getElementsByTagName('li');
-            steps[0].classList.add('visible');
-            currentStep = 1;
+            if (currentStep < steps.length - 1) {
+                document.getElementById("nextStepButton").style.display = "block";
+            } else {
+                document.getElementById("nextStepButton").style.display = "none";
+            }
         }
 
         function nextStep() {
-            const steps = stepsElement.getElementsByTagName('li');
-            if (currentStep < steps.length) {
-                steps[currentStep].classList.add('visible');
-                currentStep++;
-            }
+            currentStep++;
+            showNextStep();
         }
     </script>
+
 </body>
 </html>
