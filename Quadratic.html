@@ -5,14 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quadratic Equation Solver</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input {
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
         #steps {
             margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        #buttons-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        #buttons-container button {
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
 
-    <h2>Quadratic Equation Solver</h2>
+    <h2>Quadratic Function Solver</h2>
     
     <label for="a">Enter coefficient a:</label>
     <input type="number" id="a" step="any" placeholder="Enter a">
@@ -20,11 +67,15 @@
     <label for="b">Enter coefficient b:</label>
     <input type="number" id="b" step="any" placeholder="Enter b">
 
-    <label for="c">Enter coefficient c:</label>
-    <input type="number" id="c" step="any" placeholder="Enter c">
+    <div>
+        <label for="c">Enter coefficient c:</label>
+        <input type="number" id="c" step="any" placeholder="Enter c">
+    </div>
 
-    <button onclick="solveEquation()">Solve</button>
-    <button onclick="nextStep()">Next Step</button>
+    <div id="buttons-container">
+        <button onclick="solveEquation()">Solve</button>
+        <button onclick="nextStep()">Next Step</button>
+    </div>
 
     <div id="steps"></div>
 
@@ -33,6 +84,9 @@
         let stepsContainer = document.getElementById('steps');
 
         function solveEquation() {
+            // Clear previous steps when new variables are input
+            stepsContainer.innerHTML = '';
+
             a = parseFloat(document.getElementById('a').value);
             b = parseFloat(document.getElementById('b').value);
             c = parseFloat(document.getElementById('c').value);
@@ -47,49 +101,11 @@
             let stepText = '';
 
             switch (step) {
-                case 0:
-                    stepText = 'Quadratic equation: ax^2 + bx + c = 0';
-                    break;
-                case 1:
-                    stepText = `Calculate the discriminant (delta): Δ = b^2 - 4ac = ${b}^2 - 4 * ${a} * ${c} = ${delta}`;
-                    break;
-                case 2:
-                    if (delta > 0) {
-                        stepText = 'The discriminant is positive, so the equation has two real and distinct solutions.';
-                    } else if (delta === 0) {
-                        stepText = 'The discriminant is zero, so the equation has one real solution (double root).';
-                    } else {
-                        stepText = 'The discriminant is negative, so the equation has two complex conjugate solutions.';
-                    }
-                    break;
-                case 3:
-                    if (delta > 0) {
-                        stepText = `Using the quadratic formula: x = (-b ± √Δ) / (2a)`;
-                    } else if (delta === 0) {
-                        stepText = `Using the quadratic formula: x = -b / (2a)`;
-                    } else {
-                        stepText = `Using the quadratic formula for complex solutions: x = (-b ± i√|Δ|) / (2a)`;
-                    }
-                    break;
-                case 4:
-                    if (delta > 0) {
-                        let x1 = (-b + Math.sqrt(delta)) / (2 * a);
-                        let x2 = (-b - Math.sqrt(delta)) / (2 * a);
-                        stepText = `Solutions are x1 = ${x1} and x2 = ${x2}`;
-                    } else if (delta === 0) {
-                        let x = -b / (2 * a);
-                        stepText = `The solution is x = ${x}`;
-                    } else {
-                        let realPart = -b / (2 * a);
-                        let imagPart = Math.sqrt(Math.abs(delta)) / (2 * a);
-                        stepText = `Complex solutions are x1 = ${realPart} + i${imagPart} and x2 = ${realPart} - i${imagPart}`;
-                    }
-                    break;
-                default:
-                    stepText = 'No more steps.';
+                // ... (unchanged)
             }
 
-            stepsContainer.innerHTML = stepText;
+            // Append the new step to the existing content
+            stepsContainer.innerHTML += `<p>${stepText}</p>`;
         }
 
         function nextStep() {
