@@ -65,7 +65,14 @@
 
         function startGame() {
             score = 0;
+            enableInput();
             showEquation();
+        }
+
+        function enableInput() {
+            document.getElementById('answer').removeAttribute('disabled');
+            document.getElementById('answer').value = '';
+            document.getElementById('answer').focus();
         }
 
         function showEquation() {
@@ -103,20 +110,24 @@
                 document.getElementById('feedback').textContent = 'Correct!';
                 score++;
             } else {
-                document.getElementById('feedback').textContent = `Incorrect. The correct answer is ${correctAnswer}.`;
+                document.getElementById('feedback').textContent = `Incorrect. The correct answer is ${correctAnswer}. Game Over!`;
+                disableInput();
+                return; // End the game
             }
 
             document.getElementById('score').textContent = `Score: ${score}`;
             showEquation();
-            document.getElementById('answer').value = '';
-            document.getElementById('answer').focus();
+            enableInput();
+        }
+
+        function disableInput() {
+            document.getElementById('answer').setAttribute('disabled', 'true');
         }
     </script>
 </head>
 <body>
     <div class="game-container">
         <h1>Math Game</h1>
-        <h2>Test your skill and see how high your score can reach</h2>
         <p id="equation"></p>
         <input type="text" id="answer" placeholder="Your answer">
         <br>
