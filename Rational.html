@@ -3,95 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rational Function Calculator</title>
+    <title>Math Game</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
         }
 
-        .calculator {
-            text-align: center;
-            padding: 20px;
+        .game-container {
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
         }
 
-        label, input, button {
-            margin: 10px;
+        #equation {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        #answer {
+            width: 60px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        #feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #score {
+            margin-top: 20px;
         }
 
         button {
-            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
         }
 
-        h2 {
-            margin-top: 20px;
+        button:hover {
+            background-color: #45a049;
         }
     </style>
+    <script>
+        var score = 0;
+
+        function startGame() {
+            score = 0;
+            showEquation();
+        }
+
+        function showEquation() {
+            var num1 = Math.floor(Math.random() * 10);
+            var num2 = Math.floor(Math.random() * 10);
+            var operator = Math.random() < 0.5 ? '+' : (Math.random() < 0.5 ? '-' : '*');
+
+            var equation = `${num1} ${operator} ${num2}`;
+            document.getElementById('equation').textContent = equation;
+        }
+
+        function checkAnswer() {
+            var userAnswer = parseInt(document.getElementById('answer').value, 10);
+
+            var equationParts = document.getElementById('equation').textContent.split(' ');
+            var num1 = parseInt(equationParts[0], 10);
+            var num2 = parseInt(equationParts[2], 10);
+            var operator = equationParts[1];
+
+            var correctAnswer;
+
+            switch (operator) {
+                case '+':
+                    correctAnswer = num1 + num2;
+                    break;
+                case '-':
+                    correctAnswer = num1 - num2;
+                    break;
+                case '*':
+                    correctAnswer = num1 * num2;
+                    break;
+            }
+
+            if (userAnswer === correctAnswer) {
+                document.getElementById('feedback').textContent = 'Correct!';
+                score++;
+            } else {
+                document.getElementById('feedback').textContent = `Incorrect. The correct answer is ${correctAnswer}.`;
+            }
+
+            document.getElementById('score').textContent = `Score: ${score}`;
+            showEquation();
+            document.getElementById('answer').value = '';
+            document.getElementById('answer').focus();
+        }
+    </script>
 </head>
 <body>
-    <div class="calculator">
-        <h1>Rational Function Calculator</h1>
-        <label for="numerator">Numerator:</label>
-        <input type="text" id="numerator" placeholder="Enter numerator">
-
-        <label for="denominator">Denominator:</label>
-        <input type="text" id="denominator" placeholder="Enter denominator">
-
-        <button onclick="calculate()">Calculate</button>
-        <button onclick="nextStep()">Next Step</button>
-
-        <h2>Result:</h2>
-        <p id="result">-</p>
-
-        <h2>Steps:</h2>
-        <ol id="steps"></ol>
-
-        <script>
-            let currentStep = 0;
-            const stepsElement = document.getElementById('steps');
-
-            function calculate() {
-                const numerator = parseFloat(document.getElementById('numerator').value);
-                const denominator = parseFloat(document.getElementById('denominator').value);
-
-                stepsElement.innerHTML = ''; // Clear previous steps
-                currentStep = 0;
-
-                if (!isNaN(numerator) && !isNaN(denominator) && denominator !== 0) {
-                    const result = numerator / denominator;
-                    document.getElementById('result').innerText = `Result: ${result}`;
-
-                    // Show steps
-                    stepsElement.innerHTML += `<li>Step 1: Divide the numerator (${numerator}) by the denominator (${denominator}).</li>`;
-                    stepsElement.innerHTML += `<li>Step 2: The result is ${result}.</li>`;
-
-                    // Hide all steps initially
-                    const steps = stepsElement.getElementsByTagName('li');
-                    for (let i = 0; i < steps.length; i++) {
-                        steps[i].style.display = 'none';
-                    }
-                } else {
-                    document.getElementById('result').innerText = 'Invalid input. Please enter valid numbers.';
-                }
-            }
-
-            function nextStep() {
-                const steps = stepsElement.getElementsByTagName('li');
-                if (currentStep < steps.length) {
-                    steps[currentStep].style.display = 'block';
-                    currentStep++;
-                }
-            }
-        </script>
+    <div class="game-container">
+        <h1>Math Game</h1>
+        <p id="equation"></p>
+        <input type="text" id="answer" placeholder="Your answer">
+        <br>
+        <button onclick="checkAnswer()">Submit Answer</button>
+        <p id="feedback"></p>
+        <p id="score">Score: 0</p>
+        <button onclick="startGame()">Start New Game</button>
     </div>
 </body>
 </html>
