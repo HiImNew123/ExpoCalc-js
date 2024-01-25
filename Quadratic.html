@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0px;
             text-align: center;
         }
 
@@ -43,7 +43,7 @@
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            text-align: left;
+            text-align: center;
         }
 
         #error-message {
@@ -60,47 +60,112 @@
         #buttons-container button {
             margin-right: 10px;
         }
+
+        header {
+            background-color: #3498db;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            background-color: #ddd;
+            padding: 1em;
+            position: fixed;
+            width: 100%;
+            top: 140px;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 1em;
+        }
+
+			section {
+			margin-top: 220px;
+			}
+			
+form {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Set margin to auto for horizontal centering */
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+			
+
     </style>
 </head>
 <body>
 
-    <h2>Quadratic Function Solver</h2>
-    
-    <label for="a">Enter coefficient a:</label>
-    <input type="number" id="a" step="any" placeholder="Enter a">
+    <header>
+        <h1>EXPOCALC</h1>
+        <p>Helping students learn math in a better way</p>
+    </header>
 
-    <label for="b">Enter coefficient b:</label>
-    <input type="number" id="b" step="any" placeholder="Enter b">
+    <nav>
+        <a href="https://hiimnew123.github.io/expocalc/homepage#"><b>Home</b></a>
+        <a href="https://hiimnew123.github.io/ExpoCalc-js/Quadratic"><b>Quadratic function calculator</b></a>
+        <a href="https://hiimnew123.github.io/ExpoCalc-js/Linear"><b>Linear function slope calculator</b></a>
+        <a href="https://hiimnew123.github.io/ExpoCalc-js/Rational"><b>Help</b></a>
+        <a href="https://hiimnew123.github.io/ExpoCalc-js/m"><b>About Us</b></a>
+    </nav>
 
-    <div>
-        <label for="c">Enter coefficient c:</label>
-        <input type="number" id="c" step="any" placeholder="Enter c">
-    </div>
+    <section>
+        <h2>Quadratic Function Solver</h2>
+        <form id="quadraticForm">
+            <label for="a">Enter coefficient a:</label>
+            <input type="number" id="a" step="any" placeholder="Enter a">
 
-    <div id="buttons-container">
-        <button onclick="solveEquation()">Solve</button>
-        <button onclick="nextStep()">Next Step</button>
-    </div>
+            <label for="b">Enter coefficient b:</label>
+            <input type="number" id="b" step="any" placeholder="Enter b">
 
-    <div id="error-message"></div>
-    <div id="steps"></div>
+            <label for="c">Enter coefficient c:</label>
+            <input type="number" id="c" step="any" placeholder="Enter c">
+
+            <div id="buttons-container">
+                <button type="button" onclick="solveEquation()">Solve</button>
+                <button type="button" onclick="nextStep()">Next Step</button>
+            </div>
+        </form>
+
+        <div id="error-message"></div>
+        <div id="steps"></div>
+        <div id="answer-container"></div>
+    </section>
 
     <script>
+        document.getElementById('quadraticForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            solveEquation();
+        });
+
         let a, b, c, delta, step;
         let stepsContainer = document.getElementById('steps');
         let errorContainer = document.getElementById('error-message');
+        let answerContainer = document.getElementById('answer-container');
+        let currentStep = 0;
 
         function solveEquation() {
-            // Check if coefficients are provided
             if (!document.getElementById('a').value || !document.getElementById('b').value || !document.getElementById('c').value) {
                 errorContainer.innerHTML = 'Please enter coefficients for a, b, and c.';
                 stepsContainer.innerHTML = '';
+                answerContainer.innerHTML = '';
                 return;
             }
-
-            // Clear previous steps and error messages
-            stepsContainer.innerHTML = '';
-            errorContainer.innerHTML = '';
 
             a = parseFloat(document.getElementById('a').value);
             b = parseFloat(document.getElementById('b').value);
@@ -108,22 +173,29 @@
 
             delta = b * b - 4 * a * c;
             step = 0;
+            currentStep = 0;
 
-            // Display the quadratic equation
-            stepsContainer.innerHTML += `<p>Quadratic equation: ${a}x^2 + ${b}x + ${c} = 0</p>`;
+            stepsContainer.innerHTML = '';
+            errorContainer.innerHTML = '';
+            answerContainer.innerHTML = '';
 
-            nextStep(); // Display the first step
+            if (delta < 0) {
+                errorContainer.innerHTML = 'The equation has no real roots.';
+            } else {
+                nextStep();
+            }
         }
 
         function nextStep() {
             let stepText = '';
 
-            switch (step) {
+            switch (currentStep) {
                 case 0:
-                    stepText = 'Step 1: Identify the coefficients a, b, and c from the quadratic equation.';
+                    stepsContainer.innerHTML += `<p>Quadratic equation: ${a}x<sup>2</sup> + ${b}x + ${c} = 0</p>`;
+                    stepText = 'Step 1: Calculate the discriminant (Δ) = b<sup>2</sup> - 4ac.';
                     break;
                 case 1:
-                    stepText = `Step 2: Calculate the discriminant (Δ) = b^2 - 4ac = ${b}^2 - 4 * ${a} * ${c} = ${delta}.`;
+                    stepText = `Step 2: Δ = ${delta}.`;
                     break;
                 case 2:
                     if (delta > 0) {
@@ -147,25 +219,25 @@
                     if (delta > 0) {
                         let x1 = (-b + Math.sqrt(delta)) / (2 * a);
                         let x2 = (-b - Math.sqrt(delta)) / (2 * a);
-                        stepText = `Step 5: The solutions are x1 = ${x1} and x2 = ${x2}.`;
+                        stepText = `Step 5: The solutions are x<sub>1</sub> = ${x1} and x<sub>2</sub> = ${x2}.`;
+                        answerContainer.innerHTML = `<p>Answer: x<sub>1</sub> = ${x1}, x<sub>2</sub> = ${x2}</p>`;
                     } else if (delta === 0) {
                         let x = -b / (2 * a);
                         stepText = `Step 5: The solution is x = ${x}.`;
+                        answerContainer.innerHTML = `<p>Answer: x = ${x}</p>`;
                     } else {
                         let realPart = -b / (2 * a);
                         let imagPart = Math.sqrt(Math.abs(delta)) / (2 * a);
-                        stepText = `Step 5: The complex solutions are x1 = ${realPart} + i${imagPart} and x2 = ${realPart} - i${imagPart}.`;
+                        stepText = `Step 5: The complex solutions are x<sub>1</sub> = ${realPart} + i${imagPart} and x<sub>2</sub> = ${realPart} - i${imagPart}.`;
+                        answerContainer.innerHTML = `<p>Answer: x<sub>1</sub> = ${realPart} + i${imagPart}, x<sub>2</sub> = ${realPart} - i${imagPart}</p>`;
                     }
                     break;
                 default:
                     stepText = 'No more steps.';
             }
 
-            // Append the new step to the existing content
             stepsContainer.innerHTML += `<p>${stepText}</p>`;
-
-            // Increment the step counter
-            step++;
+            currentStep++;
         }
     </script>
 
