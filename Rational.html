@@ -3,138 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Game</title>
+    <title>Quadratic Equation Solver - EXPOCALC</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0; /* Updated to remove the default margin */
+    line-height: 1.6;
+    color: #333;
+}
+
+header {
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    background-color: #ddd;
+    padding: 1em;
+    position: fixed;
+    width: 100%;
+    top: 140px; /* Adjusted top position for better visibility */
+    z-index: 1000;
+    text-align: center;
+}
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 1em;
         }
 
-        .game-container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 300px;
+        h2 {
             text-align: center;
+            margin-top:220px; /* Adjusted margin-top for better spacing */
         }
 
-        #equation {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        #answer {
-            width: 60px;
-            padding: 5px;
-            margin-right: 10px;
-        }
-
-        #feedback {
-            margin-top: 10px;
+        dt {
             font-weight: bold;
+            margin-top: 20px; /* Adjusted margin-top for better spacing */
         }
 
-        #score {
-            margin-top: 20px;
-        }
-
-        button {
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: #45a049;
+        dd {
+            margin-bottom: 20px; /* Adjusted margin-bottom for better spacing */
         }
     </style>
-    <script>
-        var score = 0;
-
-        function startGame() {
-            score = 0;
-            enableInput();
-            showEquation();
-        }
-
-        function enableInput() {
-            document.getElementById('answer').removeAttribute('disabled');
-            document.getElementById('answer').value = '';
-            document.getElementById('answer').focus();
-        }
-
-        function showEquation() {
-            var num1 = Math.floor(Math.random() * 10);
-            var num2 = Math.floor(Math.random() * 10);
-            var operator = Math.random() < 0.5 ? '+' : (Math.random() < 0.5 ? '-' : '*');
-
-            var equation = `${num1} ${operator} ${num2}`;
-            document.getElementById('equation').textContent = equation;
-        }
-
-        function checkAnswer() {
-            var userAnswer = parseInt(document.getElementById('answer').value, 10);
-
-            var equationParts = document.getElementById('equation').textContent.split(' ');
-            var num1 = parseInt(equationParts[0], 10);
-            var num2 = parseInt(equationParts[2], 10);
-            var operator = equationParts[1];
-
-            var correctAnswer;
-
-            switch (operator) {
-                case '+':
-                    correctAnswer = num1 + num2;
-                    break;
-                case '-':
-                    correctAnswer = num1 - num2;
-                    break;
-                case '*':
-                    correctAnswer = num1 * num2;
-                    break;
-            }
-
-            if (userAnswer === correctAnswer) {
-                document.getElementById('feedback').textContent = 'Correct!';
-                score++;
-            } else {
-                document.getElementById('feedback').textContent = `Incorrect. The correct answer is ${correctAnswer}. Game Over!`;
-                disableInput();
-                return; // End the game
-            }
-
-            document.getElementById('score').textContent = `Score: ${score}`;
-            showEquation();
-            enableInput();
-        }
-
-        function disableInput() {
-            document.getElementById('answer').setAttribute('disabled', 'true');
-        }
-    </script>
 </head>
 <body>
-    <div class="game-container">
-        <h1>Math Game</h1>
-        <p id="equation"></p>
-        <input type="text" id="answer" placeholder="Your answer">
-        <br>
-        <button onclick="checkAnswer()">Submit Answer</button>
-        <p id="feedback"></p>
-        <p id="score">Score: 0</p>
-        <button onclick="startGame()">Start New Game</button>
-    </div>
+
+    <header>
+        <h1>EXPOCALC</h1>
+        <p>Helping students learn math in a better way</p>
+    </header>
+
+    <nav>
+        <a href="https://hiimnew123.github.io/expocalc/homepage#"><b>Home</b></a>
+        <a href="https://hiimnew123.github.io/ExpoCalc-js/Quadratic"><b>Quadratic function calculator</b></a>
+        <a href="https://hiimnew123.github.io/ExpoCalc-js/Linear"><b>Linear function slope calculator</b></a>
+        <a href="https://hiimnew123.github.io/ExpoCalc-js/Rational"><b>Help</b></a>
+        <a href="https://hiimnew123.github.io/ExpoCalc-js/m"><b>About Us</b></a>
+    </nav>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <dl>
+        <dt>1. How does Expocalc work?</dt>
+        <dd>This website is made to solve different kinds of mathematical problems, such as linear and quadratic equations. All you have to do is enter your equation, and Expocalc will provide you with detailed solutions.</dd>
+
+        <dt>2. Entering Equations</dt>
+        <dd>Use standard mathematical notation. For quadratic equations, enter coefficients a, b, and c. For linear equations, enter coefficients a and b.</dd>
+
+        <dt>3. Error problems</dt>
+        <dd>Check your input again for typos or improper syntax if you encounter any problems.</dd>
+
+        <dt>4. Feedback and support</dt>
+        <dd>If you encounter issues or have suggestions, contact our support team through the website's contact form.</dd>
+
+        <dt>5. Privacy and security</dt>
+        <dd>Expocalc values your privacy. Your equations are processed securely, and no personal information is stored.</dd>
+    </dl>
+
 </body>
 </html>
