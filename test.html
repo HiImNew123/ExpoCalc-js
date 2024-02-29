@@ -1,203 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+				 margin: 30px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
 
-    #quiz-container {
-      max-width: 600px;
-      margin: 0 auto;
-    }
+        }
+        #confetti {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
 
-    .question {
-      margin-bottom: 15px;
-    }
+    </style>
 
-    .options {
-      list-style: none;
-      padding: 0;
-    }
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-    .option {
-      margin-bottom: 8px;
-    }
-
-    input[type="radio"] {
-      margin-right: 5px;
-    }
-
-    #submit-btn {
-      margin-top: 15px;
-      padding: 10px 15px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
 
-<div id="quiz-container">
-  <div class="question">
-    <p>1. What is the general form of a quadratic polynomial?</p>
-    <ul class="options">
-      <li class="option"><input type="radio" name="q1" value="a"> (ax^2 + bx + c)</li>
-      <li class="option"><input type="radio" name="q1" value="b"> (mx + b)</li>
-      <li class="option"><input type="radio" name="q1" value="c"> ((x - p)(x - q))</li>
-    </ul>
-  </div>
-
-  <div class="question">
-    <p>2. Which term in a quadratic function can have a power of two?</p>
-    <ul class="options">
-      <li class="option"><input type="radio" name="q2" value="a"> Linear term</li>
-      <li class="option"><input type="radio" name="q2" value="b"> Constant term</li>
-      <li class="option"><input type="radio" name="q2" value="c"> Quadratic term</li>
-    </ul>
-  </div>
-
-  <div class="question">
-    <p>3. What is the range of a quadratic function?</p>
-    <ul class="options">
-      <li class="option"><input type="radio" name="q3" value="a"> Set of all x-values</li>
-      <li class="option"><input type="radio" name="q3" value="b"> Set of all y-values</li>
-      <li class="option"><input type="radio" name="q3" value="c"> Set of all coefficients</li>
-    </ul>
-  </div>
-
-  <div class="question">
-    <p>4. In which form is the quadratic function (f(x) = (x - p)(x - q)) expressed?</p>
-    <ul class="options">
-      <li class="option"><input type="radio" name="q4" value="a"> Standard Form</li>
-      <li class="option"><input type="radio" name="q4" value="b"> Factored Form</li>
-      <li class="option"><input type="radio" name="q4" value="c"> Vertex Form</li>
-    </ul>
-  </div>
-
-  <div class="question">
-    <p>5. If a quadratic function opens downward, what does the range include?</p>
-    <ul class="options">
-      <li class="option"><input type="radio" name="q5" value="a"> Only negative y-values</li>
-      <li class="option"><input type="radio" name="q5" value="b"> Only positive y-values</li>
-      <li class="option"><input type="radio" name="q5" value="c"> The y-value of the vertex and all numbers less than it</li>
-    </ul>
-  </div>
-
-  <div class="question">
-    <p>6. What is a defining characteristic of a linear function?</p>
-    <ul class="options">
-      <li class="option"><input type="radio" name="q6" value="a"> Forms a quadratic curve</li>
-      <li class="option"><input type="radio" name="q6" value="b"> Represents a straight line</li>
-      <li class="option"><input type="radio" name="q6" value="c"> Always has a cubic term</li>
-    </ul>
-  </div>
-
-  <div class="question">
-    <p>7. In terms of degrees, what is the maximum degree of a linear function?</p>
-    <ul class="options">
-      <li class="option"><input type="radio" name="q7" value="a"> Degree 0</li>
-      <li class="option"><input type="radio" name="q7" value="b"> Degree 1</li>
-      <li class="option"><input type="radio" name="q7" value="c"> Degree 2</li>
-    </ul>
-  </div>
-
-  <div class="question">
-    <p>8. How is a linear function generally represented in terms of its equation?</p>
-    <ul class="options">
-      <li class="option"><input type="radio" name="q8" value="a"> (y = f(x) = a + bx)</li>
-      <li class="option"><input type="radio" name="q8" value="b"> (y = f(x) = ax^2 + bx + c)</li>
-      <li class="option"><input type="radio" name="q8" value="c"> (y = f(x) = a \sin(bx))</li>
-    </ul>
-  </div>
-
-  <div class="question">
-    <p>9. Provide an example of a linear function.</p>
-    <ul class="options">
-      <li class="option"><input type="radio" name="q9" value="a"> (y = 2x^2 + 3x + 1)</li>
-      <li class="option"><input type="radio" name="q9" value="b"> (y = 5)</li>
-      <li class="option"><input type="radio" name="q9" value="c"> (y = \frac{1}{x})</li>
-    </ul>
-  </div>
-
-  <div class="question">
-    <p>10. What is the range of a linear function that is a horizontal line?</p>
-    <ul class="options">
-      <li class="option"><input type="radio" name="q10" value="a"> Infinite domains and ranges</li>
-      <li class="option"><input type="radio" name="q10" value="b"> Infinite domain, single-valued range</li>
-      <li class="option"><input type="radio" name="q10" value="c"> Single-valued domain, infinite range</li>
-    </ul>
-  </div>
-
+<form id="practiceTestForm">
+    <!-- Q1 -->
     <div class="question">
-      <p>11. What is a rational function?</p>
-      <ul class="options">
-        <li class="option"><input type="radio" id="q1a" name="q1" value="a"><label for="q1a">A function with a square root</label></li>
-        <li class="option"><input type="radio" id="q1b" name="q1" value="b"><label for="q1b">A function with a logarithm</label></li>
-        <li class="option"><input type="radio" id="q1c" name="q1" value="c"><label for="q1c">A function that can be written as a polynomial divided by a polynomial</label></li>
-      </ul>
+        <p>Q1: What is the axis of symmetry of the graph of y = x² - 8x + 12?</p>
+        <label><input type="radio" name="q1" value="A"> A. x = 2</label>
+        <label><input type="radio" name="q1" value="B"> B. x = 4</label>
+        <label><input type="radio" name="q1" value="C"> C. x = 6</label>
+        <label><input type="radio" name="q1" value="D"> D. x = 8</label>
     </div>
 
+    <!-- Q2 -->
     <div class="question">
-      <p>12. What is the domain of a rational function?</p>
-      <ul class="options">
-        <li class="option"><input type="radio" id="q2a" name="q2" value="a"><label for="q2a">All real numbers</label></li>
-        <li class="option"><input type="radio" id="q2b" name="q2" value="b"><label for="q2b">All real numbers except the zeros of the denominator</label></li>
-        <li class="option"><input type="radio" id="q2c" name="q2" value="c"><label for="q2c">Only positive integers</label></li>
-      </ul>
+        <p>Q2: In the figure below the graph could represent:</p>
+        <label><input type="radio" name="q2" value="A"> A. y = -(x - 2)² + 1</label>
+        <label><input type="radio" name="q2" value="B"> B. y = -(x - 1)² + 2</label>
+        <label><input type="radio" name="q2" value="C"> C. y = (x - 2)² + 1</label>
+        <label><input type="radio" name="q2" value="D"> D. y = -(x + 2)² + 1</label>
     </div>
 
+    <!-- Q3 -->
     <div class="question">
-      <p>13. Which of the following is an example of a rational function?</p>
-      <ul class="options">
-        <li class="option"><input type="radio" id="q3a" name="q3" value="a"><label for="q3a">y = sqrt(x)</label></li>
-        <li class="option"><input type="radio" id="q3b" name="q3" value="b"><label for="q3b">y = e^x</label></li>
-        <li class="option"><input type="radio" id="q3c" name="q3" value="c"><label for="q3c">y = (x^2 + x - 2) / (2x^2 - 2x - 3)</</label></li>
-      </ul>
+        <p>Q3: Which of the following functions would not have a parabola for its graph?</p>
+        <label><input type="radio" name="q3" value="A"> A. y + 9 = (x - 3)²</label>
+        <label><input type="radio" name="q3" value="B"> B. y = (x - 3)(x + 3)</label>
+        <label><input type="radio" name="q3" value="C"> C. y = x(4 - x)</label>
+        <label><input type="radio" name="q3" value="D"> D. y² + x² = 9</label>
     </div>
 
+    <!-- Q4 -->
     <div class="question">
-      <p>14. What is the range of the parent function f(x) = 1/x?</p>
-      <ul class="options">
-        <li class="option"><input type="radio" id="q4a" name="q4" value="a"><label for="q4a">All real numbers except 0</label></li>
-        <li class="option"><input type="radio" id="q4b" name="q4" value="b"><label for="q4b">Only positive integers</label></li>
-        <li class="option"><input type="radio" id="q4c" name="q4" value="c"><label for="q4c">All integers</label></li>
-      </ul>
+        <p>Q4: Which function has a graph which is an inverted (upside down) parabola?</p>
+        <label><input type="radio" name="q4" value="A"> A. y = 1 + x²</label>
+        <label><input type="radio" name="q4" value="B"> B. y = 1 - x²</label>
+        <label><input type="radio" name="q4" value="C"> C. y = x² - 1</label>
+        <label><input type="radio" name="q4" value="D"> D. -y = 1 - x²</label>
     </div>
 
+    <!-- Q5 -->
     <div class="question">
-      <p>15. What is the general form of a rational function?</p>
-      <ul class="options">
-        <li class="option"><input type="radio" id="q5a" name="q5" value="a"><label for="q5a">p(x)/q(x)</label></li>
-        <li class="option"><input type="radio" id="q5b" name="q5" value="b"><label for="q5b">x^2 + 2x - 1</label></li>
-        <li class="option"><input type="radio" id="q5c" name="q5" value="c"><label for="q5c">sin(x) / cos(x)</label></li>
-      </ul>
+        <p>Q5: The graph of y = x² - 8x + 12 has x-intercepts of</p>
+        <label><input type="radio" name="q5" value="A"> A. 6 and 2</label>
+        <label><input type="radio" name="q5" value="B"> B. -6 and -2</label>
+        <label><input type="radio" name="q5" value="C"> C. 6 and -2</label>
+        <label><input type="radio" name="q5" value="D"> D. -6 and 2</label>
     </div>
 
+    <!-- Q6 -->
+    <div class="question">
+        <p>Q6: The graph of y = x² - 8x + 12 has a y-intercept of</p>
+        <label><input type="radio" name="q6" value="A"> A. 2</label>
+        <label><input type="radio" name="q6" value="B"> B. -8</label>
+        <label><input type="radio" name="q6" value="C"> C. 12</label>
+        <label><input type="radio" name="q6" value="D"> D. 6</label>
+    </div>
 
-  <button id="submit-btn" onclick="submitQuiz()">Submit</button>
-</div>
+    <!-- Q7 -->
+    <div class="question">
+        <p>Q7: Which point lies on the parabola y = 2(x + 3)(x - 2)?</p>
+        <label><input type="radio" name="q7" value="A"> A. (2, 0)</label>
+        <label><input type="radio" name="q7" value="B"> B. (2, 10)</label>
+        <label><input type="radio" name="q7" value="C"> C. (2, 20)</label>
+        <label><input type="radio" name="q7" value="D"> D. (2, 8)</label>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question">
+        <p>Q8: How many x-intercepts has the graph of y = x² - 3x + 6?</p>
+        <label><input type="radio" name="q8" value="A"> A. 2</label>
+        <label><input type="radio" name="q8" value="B"> B. 1</label>
+        <label><input type="radio" name="q8" value="C"> C. 0</label>
+        <label><input type="radio" name="q8" value="D"> D. 3</label>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question">
+        <p>Q9: Which of the following functions has a parabola for its graph?</p>
+        <label><input type="radio" name="q9" value="A"> A. y + 2x = 1</label>
+        <label><input type="radio" name="q9" value="B"> B. y = 2x + 5</label>
+        <label><input type="radio" name="q9" value="C"> C. y = 2x² - 6x</label>
+        <label><input type="radio" name="q9" value="D"> D. y² = - 2x² + 6</label>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question">
+        <p>Q10: The lowest point on the graph of the parabola y = x² is called the:</p>
+        <label><input type="radio" name="q10" value="A"> A. asymptote</label>
+        <label><input type="radio" name="q10" value="B"> B. turning point</label>
+        <label><input type="radio" name="q10" value="C"> C. axis of symmetry</label>
+        <label><input type="radio" name="q10" value="D"> D. centre of rotation</label>
+    </div>
+
+    <!-- Q11 -->
+    <div class="question">
+        <p>Q11: In the ordered pair (-1,2), the abscissa is what?</p>
+        <label><input type="radio" name="q11" value="A"> A. -1</label>
+        <label><input type="radio" name="q11" value="B"> B. 2</label>
+        <label><input type="radio" name="q11" value="C"> C. 0</label>
+        <label><input type="radio" name="q11" value="D"> D. -2</label>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question">
+        <p>Q12: The point (5, -2) is located in what quadrant?</p>
+        <label><input type="radio" name="q12" value="A"> A. y = I</label>
+        <label><input type="radio" name="q12" value="B"> B. y = II</label>
+        <label><input type="radio" name="q12" value="C"> C. y = III</label>
+        <label><input type="radio" name="q12" value="D"> D. y = IV</label>
+    </div>
+
+    <!-- Q13 -->
+    <div class="question">
+        <p>Q13: What do you call the measure of the steepness of a line?</p>
+        <label><input type="radio" name="q13" value="A"> A. increment</label>
+        <label><input type="radio" name="q13" value="B"> B. slope</label>
+        <label><input type="radio" name="q13" value="C"> C. intercept</label>
+        <label><input type="radio" name="q13" value="D"> D. asymptote</label>
+    </div>
+
+    <!-- Q14 -->
+    <div class="question">
+        <p>Q14: The line with the slope 5/0 has a slope.</p>
+        <label><input type="radio" name="q14" value="A"> A. positive</label>
+        <label><input type="radio" name="q14" value="B"> B. negative</label>
+        <label><input type="radio" name="q14" value="C"> C. zero</label>
+        <label><input type="radio" name="q14" value="D"> D. undefined</label>
+    </div>
+
+    <!-- Q15 -->
+    <div class="question">
+        <p>Q15: The points (2,4) and (5.) lie on the line whose slope is 7/3.</p>
+        <label><input type="radio" name="q15" value="A"> A. 11</label>
+        <label><input type="radio" name="q15" value="B"> B. 2</label>
+        <label><input type="radio" name="q15" value="C"> C. -11</label>
+        <label><input type="radio" name="q15" value="D"> D. -2</label>
+    </div>
+
+    <!-- Q16 -->
+    <div class="question">
+        <p>Q16: The graph of a linear equation is</p>
+        <label><input type="radio" name="q16" value="A"> A. a circle</label>
+        <label><input type="radio" name="q16" value="B"> B. a line</label>
+        <label><input type="radio" name="q16" value="C"> C. an ellipse</label>
+        <label><input type="radio" name="q16" value="D"> D. a hyperbola</label>
+    </div>
+
+    <!-- Q17 -->
+    <div class="question">
+        <p>Q17: Which of the following is a linear equation?</p>
+        <label><input type="radio" name="q17" value="A"> A. x + y = 1</label>
+        <label><input type="radio" name="q17" value="B"> B. x² + y = 2</label>
+        <label><input type="radio" name="q17" value="C"> C. x + y² = 0</label>
+        <label><input type="radio" name="q17" value="D"> D. x + y = 1/x</label>
+    </div>
+
+    <!-- Q18 -->
+    <div class="question">
+        <p>Q18: The linear equation x-3y-2 has a x-intercept of…</p>
+        <label><input type="radio" name="q18" value="A"> A. 2</label>
+        <label><input type="radio" name="q18" value="B"> B. 2/3</label>
+        <label><input type="radio" name="q18" value="C"> C. -2/3</label>
+        <label><input type="radio" name="q18" value="D"> D. -2</label>
+    </div>
+
+    <!-- Q19 -->
+    <div class="question">
+        <p>Q19: The linear equation x -3y-2 has a y-intercept of….</p>
+        <label><input type="radio" name="q19" value="A"> A. 2</label>
+        <label><input type="radio" name="q19" value="B"> B. 2/3</label>
+        <label><input type="radio" name="q19" value="C"> C. -2/3</label>
+        <label><input type="radio" name="q19" value="D"> D. -3/2</label>
+    </div>
+
+    <!-- Q20 -->
+    <div class="question">
+        <p>Q20: A line whose slope is -1 has a y-intercept of 3. The equation of the line is…</p>
+        <label><input type="radio" name="q20" value="A"> A. x + y = 3</label>
+        <label><input type="radio" name="q20" value="B"> B. x - y = 3</label>
+        <label><input type="radio" name="q20" value="C"> C. y - x = 3</label>
+        <label><input type="radio" name="q20" value="D"> D. x + y + 3 = 0</label>
+    </div>
+
+    <!-- Repeat for other questions -->
+
+    <button type="button" onclick="submitAnswers()">Submit Answers</button>
+</form>
 
 <script>
-  function submitQuiz() {
-    const correctAnswers = ['a', 'c', 'b', 'b', 'c','b', 'b', 'a', 'b', 'a','c','b','c','a','a'];
-    let score = 0;
+    function submitAnswers() {
+        // Correct answers for each question
+        const correctAnswers = {
+            q1: 'B', q2: 'C', q3: 'B', q4: 'B', q5: 'C',
+            q6: 'C', q7: 'B', q8: 'C', q9: 'C', q10: 'B',
+            q11: 'A', q12: 'D', q13: 'B', q14: 'D', q15: 'A',
+            q16: 'B', q17: 'A', q18: 'A', q19: 'C', q20: 'C',
+            // Add correct answers for the remaining questions
+        };
 
-    for (let i = 1; i <= 15; i++) {
-      const selectedOption = document.querySelector('input[name="q' + i + '"]:checked');
-      if (selectedOption) {
-        if (selectedOption.value === correctAnswers[i - 1]) {
-          score++;
+        // Collect selected answers
+        const form = document.getElementById('practiceTestForm');
+        const formData = new FormData(form);
+
+        // Compare selected answers with correct answers
+        let score = 0;
+        formData.forEach((value, key) => {
+            if (correctAnswers[key] === value) {
+                score++;
+            }
+        });
+
+        // Display score and comment
+        let comment = '';
+        if (score >= 20) {
+            comment = 'Excellent! You have a strong understanding of the material.';
+        } else if (score >= 15) {
+            comment = 'Good job! You have a solid grasp of the concepts.';
+        } else if (score >= 10) {
+            comment = 'Not bad! You\'re on the right track, but there\'s room for improvement.';
+        } else {
+            comment = 'Keep practicing! You can improve your understanding with more study.';
         }
-      }
+
+        // Display confetti effect
+        showConfetti();
+
+        // Display score and comment
+        alert(`Your Score: ${score} out of ${Object.keys(correctAnswers).length}\n\n${comment}`);
     }
 
-    alert('Quiz submitted!\n\nYour score: ' + score + '/15');
-  }
+    function showConfetti() {
+        particlesJS('confetti', {
+            particles: {
+                number: {
+                    value: 5000,
+                },
+                size: {
+                    value: 10,
+                },
+            },
+            interactivity: {
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse',
+                    },
+                },
+            },
+        });
+    }
 </script>
+
+<div id="confetti"></div>
 
 </body>
 </html>
